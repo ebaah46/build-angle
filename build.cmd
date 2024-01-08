@@ -69,7 +69,7 @@ pushd angle.src
 
 set DEPOT_TOOLS_WIN_TOOLCHAIN=0
 call gclient sync || exit /b 1
-call gn gen out/Release --args="angle_build_all=false is_debug=false angle_has_frame_capture=false angle_enable_gl=false angle_enable_vulkan=false angle_enable_d3d9=false angle_enable_null=false" || exit /b 1
+call gn gen out/Release --args="angle_build_all=false is_debug=false angle_has_frame_capture=false angle_enable_gl=false angle_enable_vulkan=false angle_enable_d3d9=false angle_enable_null=false target_cpu=x86" || exit /b 1
 call git apply -p0 ..\angle.patch || exit /b 1
 call autoninja -C out/Release libEGL libGLESv2 libGLESv1_CM || exit /b 1
 popd
@@ -83,7 +83,7 @@ mkdir angle\include
 
 copy /y angle.src\.git\refs\heads\main angle\commit.txt 1>nul 2>nul
 
-copy /y "%ProgramFiles(x86)%\Windows Kits\10\Redist\D3D\x64\d3dcompiler_47.dll" angle\bin 1>nul 2>nul
+copy /y "%ProgramFiles(x86)%\Windows Kits\10\Redist\D3D\x86\d3dcompiler_47.dll" angle\bin 1>nul 2>nul
 
 copy /y angle.src\out\Release\libEGL.dll       angle\bin        1>nul 2>nul
 copy /y angle.src\out\Release\libGLESv1_CM.dll angle\bin        1>nul 2>nul
